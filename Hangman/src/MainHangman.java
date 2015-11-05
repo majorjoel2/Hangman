@@ -19,8 +19,12 @@ public class MainHangman {
 		return word.length();
 	}
 	
-	public static byte askLetter(String word) {
-		return 1;
+	public static String askLetter(String word) {
+		Scanner keybrd = new Scanner(System.in);
+ 		String question = "Letter?";
+ 		System.out.println(question);
+ 		String letter = keybrd.nextLine();
+		return letter.toLowerCase();
 	}
 
 	public static void main(String[] args) {
