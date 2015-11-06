@@ -14,9 +14,13 @@ public class MainHangman {
 		return output;
 	}
 	
-	public static int prepareHangman(String word) {
+	public static String[] prepareHangman(String word) {
 		//do some stuff to prepare for the game
-		return word.length();
+		String[] letters = new String[word.length()];
+		for( int i=0; i < letters.length; i++){
+			letters[i] = word.substring ( i, i+1);
+		}
+		return letters; 
 	}
 	
 	public static byte askLetter(String word) {
