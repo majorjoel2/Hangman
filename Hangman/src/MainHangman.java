@@ -5,7 +5,7 @@ public class MainHangman {
 	
 	public static String randomWord() {
 		//select a word at random
-		String[] wordList = new String[] {"", "1", "2"};
+		String[] wordList = new String[] {"cat", "egypt", "ten", "python", "pokemon", "blue", "train", "zone", "lost", "network"};
 		int min = 0;
 		int max = 9;
 		Random Random = new Random();
@@ -23,12 +23,22 @@ public class MainHangman {
 		return letters; 
 	}
 	
-	public static String askLetter(String word) {
+	public static String askLetter() {
 		Scanner keybrd = new Scanner(System.in);
- 		String question = "Letter?";
+ 		String question = "Letter? ";
  		System.out.println(question);
  		String letter = keybrd.nextLine();
 		return letter.toLowerCase();
+	}
+	
+	public static byte letterPOS(String[] word, String letter) {
+		byte POS = 100;
+		for(byte i = 0; i < word.length; i++) {
+			if(word[i].equals(letter)) {
+				POS = i;
+			}
+		}
+		return POS;
 	}
 	
 	static String l1 = " ";
@@ -128,12 +138,65 @@ public class MainHangman {
 		System.out.println("");
 		System.out.println("");
 	}
+	
+	public static byte hasWon(String word) {
+		int WordLenth = word.length();
+		if(WordLenth == 3 && l1 != " " && l2 != " " && l3 != " ") {
+			return 2;
+		}
+		if(WordLenth == 4 && l1 != " " && l2 != " " && l3 != " " && l4 != " ") {
+			return 2;
+		}
+		if(WordLenth == 5 && l1 != " " && l2 != " " && l3 != " " && l4 != " " && l5 != " ") {
+			return 2;
+		}
+		if(WordLenth == 6 && l1 != " " && l2 != " " && l3 != " " && l4 != " " && l5 != " " && l6 != " ") {
+			return 2;
+		}
+		if(WordLenth == 7 && l1 != " " && l2 != " " && l3 != " " && l4 != " " && l5 != " " && l6 != " " && l7 != " ") {
+			return 2;
+		}
+		if(WordLenth == 8 && l1 != " " && l2 != " " && l3 != " " && l4 != " " && l5 != " " && l6 != " " && l7 != " " && l8 != " ") {
+			return 2;
+		}
+		return 0;
+	}
 		
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		updateUI("c", 0, 1, "cat");
-		updateUI("a", 1, 1, "cat");
-		updateUI("t", 2, 1, "cat");
+		System.out.println("Welcome to Hangman/nCreated by the first (and best) APCS class.");
+		String randomWord = randomWord();
+		String[] word = prepareHangman(randomWord);
+		byte winCondition = 0; //0=nothing 1=lost 2=won
+		byte letterPOS;
+		boolean correctLetter;
+		boolean repeatLetter;
+		String letter = "";
+		
+		while(winCondition == 0) {
+			letter = askLetter();
+			correctLetter = true;//correctLetter = grant'sTask(word, letter);
+			if(correctLetter == true) {
+				letterPOS = letterPOS(word, letter);
+				updateUI(letter, letterPOS, 1, randomWord);
+			} else {
+				repeatLetter = false;//repeatLetter = david'sTask(word, letter);
+				if(repeatLetter == false) {
+					updateUI("", 100, 0, randomWord);
+				}
+			}
+			if(stage == 6) {
+				winCondition = 1;
+			} else {
+				winCondition = hasWon(randomWord);
+			}
+		}
+		
+		if(winCondition == 1) {
+			System.out.println("*********/n YOU LOST/n*********");
+		}
+		if(winCondition == 0) {
+			System.out.println("********/n YOU WON/n********/n/n");
+		}
+		System.out.println("Thank you for playing Hangman");
 	}
-
 }
