@@ -192,10 +192,10 @@ public class MainHangman {
 		}
 		
 		if(winCondition == 1) {
-			System.out.println("*********/n YOU LOST/n*********");
+			System.out.println("*********\n YOU LOST\n*********");
 		}
-		if(winCondition == 0) {
-			System.out.println("********/n YOU WON/n********/n/n");
+		if(winCondition == 2) {
+			System.out.println("********\n YOU WON\n********\n\n");
 		}
 		System.out.println("Thank you for playing Hangman");
 	}
