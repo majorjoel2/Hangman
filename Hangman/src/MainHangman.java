@@ -26,7 +26,16 @@ public class MainHangman {
  		String letter = keybrd.nextLine();
 		return letter.toLowerCase();
 	}
-
+	
+	public static boolean isCorrect(String word, String letter) {
+		for(int i = 0; i < word.length(); i++) {
+			if(word.substring(i, i+1) == letter) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
