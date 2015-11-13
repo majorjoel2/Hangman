@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -22,10 +23,29 @@ public class MainHangman {
 	public static byte askLetter(String word) {
 		return 1;
 	}
-
+	
+	static String[] missed = new String[] {"", "", "", "", "", ""};
+	public static boolean missedLetter(String letter){
+		for(int i = 0; i < 6; i++) {
+			if(missed[i].equals(letter)) {
+				return true;
+			}
+		}
+		for(int j = 0; j < 6; j++) {
+			if(missed[j].equals("")) {
+				missed[j] = letter;
+				return false;
+			}
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		System.out.println(missedLetter(""));
 	}
-
 }
+
+
+
+
