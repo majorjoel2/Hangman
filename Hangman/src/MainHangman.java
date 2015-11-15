@@ -31,6 +31,15 @@ public class MainHangman {
 		return letter.toLowerCase();
 	}
 	
+	public static boolean isCorrect(String word, String letter) {
+		for(int i = 0; i < word.length(); i++) {
+			if(word.substring(i, i+1).equals(letter)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static byte letterPOS(String[] word, String letter) {
 		byte POS = 100;
 		for(byte i = 0; i < word.length; i++) {
@@ -39,6 +48,22 @@ public class MainHangman {
 			}
 		}
 		return POS;
+	}
+	
+	static String[] missed = new String[] {"", "", "", "", "", ""};
+	public static boolean missedLetter(String letter){
+		for(int i = 0; i < 6; i++) {
+			if(missed[i].equals(letter)) {
+				return true;
+			}
+		}
+		for(int j = 0; j < 6; j++) {
+			if(missed[j].equals("")) {
+				missed[j] = letter;
+				return false;
+			}
+		}
+		return false;
 	}
 	
 	static String l1 = " ";
@@ -174,12 +199,12 @@ public class MainHangman {
 		
 		while(winCondition == 0) {
 			letter = askLetter();
-			correctLetter = true;//correctLetter = grant'sTask(word, letter);
+			correctLetter = isCorrect(randomWord, letter);
 			if(correctLetter == true) {
 				letterPOS = letterPOS(word, letter);
 				updateUI(letter, letterPOS, 1, randomWord);
 			} else {
-				repeatLetter = false;//repeatLetter = david'sTask(word, letter);
+				repeatLetter = missedLetter(letter);
 				if(repeatLetter == false) {
 					updateUI("", 100, 0, randomWord);
 				}
@@ -192,10 +217,10 @@ public class MainHangman {
 		}
 		
 		if(winCondition == 1) {
-			System.out.println("*********\n YOU LOST\n*********");
+			System.out.println("**********\n YOU LOST\n**********\n\n");
 		}
 		if(winCondition == 2) {
-			System.out.println("********\n YOU WON\n********\n\n");
+			System.out.println("*********\n YOU WON\n*********\n\n");
 		}
 		System.out.println("Thank you for playing Hangman");
 	}
